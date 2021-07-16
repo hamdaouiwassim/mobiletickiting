@@ -1,0 +1,162 @@
+<app-header-partenaire></app-header-partenaire>
+
+
+
+<div class="container p-5 m-5">
+  <div class="row col-12">
+
+    <div class="col-6">
+      <h4 class="text-secondary"> <i class="bi bi-bookmarks-fill"></i> Liste des evenements</h4>
+    </div>
+    <div class="col-6 d-flex justify-content-end p-2">
+      <a  class="btn btn-primary" (click)="open(content)"><i class="bi bi-bookmark-plus-fill"></i> Ajouter</a>
+
+    </div>
+  </div>
+    
+    <hr /> 
+    <div class="row col-12">
+        <div class="col-3" *ngFor="let event of events">
+          <div class="card"  >
+            <img src="http://127.0.0.1:8000/uploadsFolder/{{ event.image }}" class="card-img-top" alt="...">
+            <div class="card-body">
+           
+              <h5 class="card-title">{{ event.nom }}</h5>
+              <p class="card-text"> {{ event.description }}</p>
+             
+              <a (click)="showEvent(show,event)" class="btn btn-primary me-2">Details</a>
+              <a (click)="deleteEvent(event._id)" class="btn btn-danger">Annuler</a>
+            </div>
+          </div>
+           
+        </div>
+      
+    </div>
+
+
+
+</div>
+
+    
+<ng-template #content let-modal>
+    <form #addEventForm="ngForm" (ngSubmit)="addEvent(addEventForm)" enctype="multipart/form-data">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Ajouter evenement</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+    
+
+        <div class="form-group">
+            <label for="dateOfBirth">Categorie Evenement :</label>
+            <select name="categorie" ngModel #categorie="ngModel" class="form-control">
+              <option selected value="" >Choisir une categorie</option>
+              <option *ngFor="let cat of categories" value="{{ cat._id }}" >{{ cat.nom }}</option>
+            </select>
+            
+          </div>
+        <div class="form-group">
+          <label for="dateOfBirth">Nom evenement :</label>
+          <input type="text" name="nom" ngModel #nom="ngModel" placeholder="Nom Evenement ..." class="form-control">
+          
+        </div>
+        <div class="form-group">
+          <label for="dateOfBirth">Description Evenement :</label>
+          <textarea name="description" ngModel #description="ngModel" class="form-control" placeholder="description Evenement ..." cols="30" rows="10"></textarea>
+ 
+          
+        </div>
+        
+        <div class="form-group">
+            <label for="dateOfBirth">Image Evenement :</label>
+            <input type="file" name="image" (change)="onSelectFile($event)" class="form-control" placeholder="image Evenement ..." />
+   
+            
+          </div>
+          <div class="form-group">
+            <label for="dateOfBirth">Nombres des Ticket standard :</label>
+            <input type="number" name="nbrstd" ngModel #nbrstd="ngModel" class="form-control" placeholder="Nombres tickets standard ..." />
+     
+          </div>
+          <div class="form-group">
+            <label for="dateOfBirth">Prix Ticket standard :</label>
+            <input type="number" name="prixstd" ngModel #prixstd="ngModel" class="form-control" placeholder="prix ticket standard ..." />
+     
+          </div>
+          <div class="form-group">
+            <label for="dateOfBirth">Prix Ticket premium :</label>
+            <input type="number" name="nbrprm" ngModel #nbrprm="ngModel" class="form-control" placeholder="Nombres tickets standard ..." />
+     
+          </div>
+          <div class="form-group">
+            <label for="dateOfBirth">Prix Ticket premium :</label>
+            <input type="number" name="prixprm" ngModel #prixprm="ngModel" class="form-control" placeholder="prix ticket premium..." />
+     
+          </div>
+
+          <div class="form-group">
+            <label for="dateOfBirth">Date Evenement :</label>
+            <input type="date" name="date" ngModel #date="ngModel" class="form-control" placeholder="date evenement ..." />
+     
+          </div>
+
+          <div class="form-group">
+            <label for="dateOfBirth">heure Evenement :</label>
+            <input type="time" name="heure" ngModel #heure="ngModel" class="form-control" placeholder="heure evenement ..." />
+     
+          </div>
+       
+       
+       
+       
+
+      
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-outline-dark" >Save</button>
+    </div>
+  </form>
+  </ng-template>
+
+
+
+     
+<ng-template #show let-modal>
+  <div class="card"  >
+    <img src="http://127.0.0.1:8000/uploadsFolder/{{ sowedEvent.image }}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Nom Evenement : {{ sowedEvent.nom }}</h5>
+      <hr />
+      <p class="card-text">Description evenement : <br /> {{ sowedEvent.description }}</p>
+      <hr />
+      <table class="table table-bordred">
+        <thead>
+          <tr>
+            <th class="scope">Type Ticket</th>
+            <th class="scope">Nombre des tickests</th>
+            <th class="scope">Prix Ticket</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge bg-success me-2">Standard</span></td>
+            <td><span class="badge bg-primary me-2">{{ sowedEvent.nbrstd }} Tickets</span></td>
+            <td><span class="badge bg-warning">{{ sowedEvent.prixstd }} DTT</span></td>
+          </tr>
+          <tr>
+            <td><span class="badge bg-warning me-2">Premium</span></td>
+            <td><span class="badge bg-primary me-2">{{ sowedEvent.nbrprm }} Tickets</span></td>
+            <td><span class="badge bg-warning">{{ sowedEvent.prixprm }} DTT</span></td>
+          </tr>
+        </tbody>
+      </table>
+   
+
+     
+     
+   
+    </div>
+  </div>
+</ng-template>

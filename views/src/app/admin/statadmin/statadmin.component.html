@@ -1,0 +1,35 @@
+<app-header-admin></app-header-admin>
+
+  <div class="container p-5 mt-5 row">
+      <div  class="col-6">
+          <h3>Liste des partenaires </h3>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="scope">#</th>
+                        <th class="scope" >Partenaire</th>
+                        <th class="scope" >Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let p of partenaires;index as i" (click)="getPartenaireStat(p)" style="cursor: pointer;">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ p.user.username }}</td>
+                        <td>{{ p.user.email }}</td>
+                    </tr>
+                </tbody>
+
+            </table>
+      </div>
+      <div  class="col-6">
+        <canvas baseChart width="400" height="400"
+        [datasets]="lineChartData"
+        [labels]="lineChartLabels"
+        [options]="lineChartOptions"
+        [colors]="lineChartColors"
+        [legend]="lineChartLegend"
+        [chartType]="lineChartType"
+        [plugins]="lineChartPlugins">
+      </canvas>
+    </div>
+  </div>

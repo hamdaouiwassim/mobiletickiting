@@ -1,0 +1,68 @@
+<app-navbarc></app-navbarc>
+
+  <div class="container p-5 m-5">
+      <h4 class="text-center text-secondary"> <i class="bi bi-credit-card-2-front"></i> Liste des evenements</h4>
+
+      <input type="text" class="form-control" (keyup)="serachEvent($event)" placeholder="evenement a chercher ...">
+     
+      <div class="col-12 row p-3">
+        <div class="col-3" *ngFor="let e of events">
+          <div class="card" >
+            <div class="card-header">
+                  <h6> {{ e.date | date }}</h6>
+            </div>
+            <div class="card-body">
+              <img src="http://127.0.0.1:8000/uploadsFolder/{{e.image}}" class="img-fluid mb-2">
+              <h6> {{ e.nom }}  </h6>
+                <h5><span class="badge bg-success me-2"> {{ e.prixstd }} DDT </span>
+                <span class="badge bg-warning"> {{ e.prixprm }} DDT </span></h5>
+                <p>{{ e.description | slice:0:100 }} ...</p>
+                <button class="btn btn-primary" (click)="open(content,e)">Participer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+    
+
+
+  </div>
+
+
+
+
+  <ng-template #content let-modal>
+    <form #addReservationForm="ngForm" (ngSubmit)="addReservation(addReservationForm)" enctype="multipart/form-data">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Reservation Evenement</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+  
+
+        <div class="form-group">
+          <label for="dateOfBirth">Nombre des tickets :</label>
+          <input type="number" name="nbrtickets" ngModel #nbrtickets="ngModel"  placeholder="Nombre des tickets ..." class="form-control">
+          
+        </div>
+        <div class="form-group">
+          <label for="dateOfBirth">Type de ticket</label>
+          <select name="typeticket" ngModel #typeticket="ngModel"  class="form-control">
+            <option value="standard">Billet Standard</option>
+            <option value="premium">Billet Premium</option>
+           
+            
+          </select>
+
+          
+        </div>
+      
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-outline-dark" >valider</button>
+    </div>
+  </form>
+  </ng-template>
+

@@ -1,0 +1,37 @@
+<app-header-partenaire></app-header-partenaire>
+
+
+
+<div class="container p-5 m-5">
+  <div class="row col-12">
+
+    <div class="col-6">
+      <h4 class="text-secondary"> <i class="bi bi-bookmarks-fill"></i> statistiques</h4>
+    </div>
+    
+  </div>
+    
+    <hr /> 
+    <div class="row col-12">
+       
+<div class="chart-wrapper">
+    <canvas baseChart 
+    [datasets]="barChartData"
+    [labels]="barChartLabels"
+    [options]="barChartOptions"
+    [plugins]="barChartPlugins"
+    [legend]="barChartLegend"
+    [chartType]="barChartType">
+  </canvas>
+</div>
+
+      
+    </div>
+
+
+
+</div>
+
+    
+
+     
